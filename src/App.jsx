@@ -15,7 +15,7 @@ function App() {
     const questions = data.results.map((question) => ({
      ...question,
      answers: [question.correct_answer, ...question.incorrect_answers].sort(
-      () => Math.floor(Math.random() * 0.5)
+      () => Math.floor(Math.random() - 0.5)
      ),
      category: question.category,
      difficulty: question.difficulty,
