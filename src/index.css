@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   background-color: white;
 
   font-synthesis: none;
@@ -9,13 +9,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-
-body {
-  padding: 0;
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
 
 
 

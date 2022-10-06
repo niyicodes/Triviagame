@@ -1,59 +1,70 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
+import Card from "./Component/Card/Card";
+
 
 function App() {
- const [quizFetch, setQuizFetch] = useState({
-  isloading: true,
-  errorMessage: "",
-  data: null,
- });
+ const [questions, setQuestions] = useState([]);
+ const [currentIndex, setCurrentIndex] = useState(0);
+ const [score, setScore] = useState(0);
 
- const fetchQuiz = async () => {
-  const res = await fetch("https://opentdb.com/api.php?amount=10");
-  const data = await res.json();
-  setQuizFetch({
-   isloading: false,
-   errorMessage: "",
-   data: data,
-  });
-  console.log(data);
- };
+
 
  useEffect(() => {
-  fetchQuiz();
+  fetch("https://opentdb.com/api.php?amount=10")
+   .then((res) => res.json())
+   .then((data) => {
+    const questions = data.results.map((question) => ({
+     ...question,
+     answers: [question.correct_answer, ...question.incorrect_answers].sort(
+      () => Math.floor(Math.random() * 0.5)
+     ),
+     category: question.category,
+     difficulty: question.difficulty,
+     type: question.type,
+    }));
+    setQuestions(questions);
+   });
  }, []);
+
+ const handleAnswer = (answer) => {
+  if (answer === questions[currentIndex].correct_answer) {
+   setScore(score + 1);
+  }
+  setCurrentIndex(currentIndex + 1);
+ };
  return (
   <div className="App">
    <h3 className="title">Trivia Game</h3>
-   <p className="total-num">{15} questions in this game.</p>
-   <div className="numOfQues">
-    <h4 className="current-num">
-     {1} / {15}
-    </h4>
-    <div className="details">
-     <p className="detail">
-      Category: <span>{"Entertainment"}</span>
-     </p>
-     <p className="detail">
-      Type: <span>{"boolean"}</span>
-     </p>
-     <p className="detail">
-      Difficulty: <span>{"medium"}</span>
-     </p>
-    </div>
-   </div>
-   <div className="triviaArea">
-    <p className="question">{"What does the acronym CDN stand for in terms of networking?"}</p>
-    <ul className="option-list">
-      <li className="option">Lagos</li>
-      <li className="option">abuja</li>
-      <li className="option">Ekiti</li>
-      <li className="option">Kaduna</li>
-    </ul>
-   </div>
-   <button>Next ➡</button>
+   <p className="total-num">{questions.length} questions in this game.</p>
+   {questions.map((question) => {
+    return (
+     <Card
+      question={question.question}
+      answers={question.answers}
+      category={question.category}
+      type={question.type}
+      difficulty={question.difficulty}
+      handleAnswer={handleAnswer}
+     />
+    );
+   })}
   </div>
  );
 }
+{
+ /* <Trivia handleAnswer={handleAnswer} data={questions[currentIndex]} /> */
+}
 
+{
+ /* <Trivia 
+            key={correct_answer}
+            cat={category}
+            correct_answer={correct_answer}
+            answers={answers}
+            type={type}
+            question={question}
+            difficulty={difficulty}
+          /> */
+}
 export default App;
