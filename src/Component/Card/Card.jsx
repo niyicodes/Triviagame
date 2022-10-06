@@ -29,17 +29,16 @@ const Card = ({
     <p className="question" dangerouslySetInnerHTML={{ __html: question }} />
     <ul className="option-list">
      {answers.map((answer, idx) => {
-      const rightAnswer = showAnswer
+      const specialClassName = showAnswer
        ? answer === correct_answer
-         ? "green"
-         : "red"
+         ? "green-button"
+         : "red-button"
        : "";
       return (
-       <li
-        key={idx}
-        className={`option ${rightAnswer}`}
-        dangerouslySetInnerHTML={{ __html: answer }}
+       <button
+        className={`normal-button ${specialClassName}`}
         onClick={() => handleAnswer(answer)}
+        dangerouslySetInnerHTML={{ __html: answer }}
        />
       );
      })}
