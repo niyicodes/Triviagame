@@ -1,17 +1,13 @@
 import React from "react";
-import "./Card.scss";
+import "./Card.scss"
 
-const Card = ({
- data: { question, category, answers, correct_answer, type, difficulty },
- handleAnswer,
- index,
- handleNextQuestion,
- showAnswer,
-}) => {
+const Card = ({ question, category, answers, type, difficulty, handleAnswer, index }) => {
  return (
   <div className="card">
    <div className="numOfQues">
-    <h4 className="current-num">Question {index}</h4>
+    <h4 className="current-num">
+     Question {index}
+    </h4>
     <div className="details">
      <p className="detail">
       Category: <span>{category}</span>
@@ -29,15 +25,10 @@ const Card = ({
     <p className="question" dangerouslySetInnerHTML={{ __html: question }} />
     <ul className="option-list">
      {answers.map((answer, idx) => {
-      const rightAnswer = showAnswer
-       ? answer === correct_answer
-         ? "green"
-         : "red"
-       : "";
       return (
        <li
         key={idx}
-        className={`option ${rightAnswer}`}
+        className="option"
         dangerouslySetInnerHTML={{ __html: answer }}
         onClick={() => handleAnswer(answer)}
        />
@@ -45,7 +36,6 @@ const Card = ({
      })}
     </ul>
    </div>
-   {showAnswer && <button onClick={handleNextQuestion}>Next</button>}
   </div>
  );
 };
