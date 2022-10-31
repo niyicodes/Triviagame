@@ -9,7 +9,7 @@ function App() {
  const [showAnswer, setShowAnswer] = useState(false);
 
  useEffect(() => {
-  fetch("https://opentdb.com/api.php?amount=10")
+  fetch("https://opentdb.com/api.php?amount=20")
    .then((res) => res.json())
    .then((data) => {
     const questions = data.results.map((question) => ({

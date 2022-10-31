@@ -1,11 +1,11 @@
 .card {
  color: white;
  padding: 5px 10px;
- width: 95%;
+ width: 100%;
  justify-content: center;
  margin: 30px auto;
  border-radius: 16px;
- background: rgb(232, 172, 21);
+ background: rgb(21, 232, 63);
  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
  backdrop-filter: blur(5.4px);
  -webkit-backdrop-filter: blur(5.4px);
@@ -32,9 +32,11 @@
 
    .detail {
     font-size: 20px;
+    color: rgb(137, 102, 55);
     span {
      font-style: italic;
      font-size: 17px;
+     color: black;
     }
    }
   }
@@ -48,13 +50,15 @@
    padding: 20px 0;
    line-height: 1.4;
    text-align: center;
+   color: black;
+   font-weight: bold;
   }
 
   .option-list {
    display: grid;
    grid-template-columns: repeat(2, 1fr);
    row-gap: 20px;
-   column-gap: 30px;
+   column-gap: 5px;
    list-style: none;
 
    .green-button {
@@ -66,10 +70,10 @@
    }
    .normal-button {
     background-color: white;
-    width: 380px;
+    width: 300px;
     height: 80px;
     padding: 8px;
-    margin: 24px;
+    margin: 20px;
     // color: orange;
     font-weight: bolder;
     font-size: larger;
@@ -98,4 +102,25 @@
    border: 3px solid rgb(85, 155, 133);
   }
  }
+}
+
+@media (min-width: 260px) and (max-width: 578px){
+  .card{
+    width: 100%;
+   .triviaArea{
+    .option-list{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: .5rem;
+
+      .normal-button{
+        width: 250px;
+        height: 70px;
+        font-weight: normal;
+      }
+    }
+   }
+  }
 }
